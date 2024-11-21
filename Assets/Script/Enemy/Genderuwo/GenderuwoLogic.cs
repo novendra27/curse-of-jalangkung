@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GenderuwoLogic2 : MonoBehaviour
+public class GenderuwoLogic : MonoBehaviour
 {
     public float hitPoints = 100f;
     public float turnSpeed = 2f;
@@ -15,7 +15,7 @@ public class GenderuwoLogic2 : MonoBehaviour
 
     // Variabel untuk idle movement
     public float idleMoveRadius = 5f;
-    private float idleMoveTimer = 0f;
+    //private float idleMoveTimer = 0f;
     private Vector3 idleDestination;
     public float idleMoveSpeed = 1f;
     public float normalMoveSpeed = 3.5f;
