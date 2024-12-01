@@ -7,10 +7,10 @@ public class TextControl : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
     private CanvasGroup canvasGroup;
-    private float showTime = 6.5f;  // Time to show text
-    private float hideTime = 14.4f;  // Time to hide text
-    private float fadeDuration = 2f;  // Duration of fade in/out
-    private float switchSceneTime = 15.5f;  // Time to switch to MainMenu scene
+    private float showTime = 6.5f;
+    private float hideTime = 14.4f;
+    private float fadeDuration = 2f;
+    private float switchSceneTime = 15.5f;
 
     void Start()
     {
@@ -22,12 +22,11 @@ public class TextControl : MonoBehaviour
             return;
         }
 
-        canvasGroup.alpha = 0;  // Set initial alpha to 0 (invisible)
+        canvasGroup.alpha = 0; 
 
-        // Jadwalkan efek fade in, fade out, dan pindah scene
         Invoke("FadeIn", showTime);
         Invoke("FadeOut", hideTime);
-        Invoke("SwitchToMainMenu", switchSceneTime);  // Pindah ke MainMenu setelah 15 detik
+        Invoke("SwitchToMainMenu", switchSceneTime);  
     }
 
     void FadeIn()
