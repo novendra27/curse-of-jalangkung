@@ -50,6 +50,10 @@ public class GenderuwoLogic : MonoBehaviour
     private float idleTransitionTimer = 0f;
 
 
+    public float maxIdleMoveTime = 5f; // Waktu maksimal yang diizinkan untuk mencapai tujuan idle
+    private float idleMoveTimer = 0f; // Timer untuk melacak waktu menuju titik idle
+
+
     public void TakeDamage(float damage)
     {
         hitPoints -= damage;
@@ -71,6 +75,7 @@ public class GenderuwoLogic : MonoBehaviour
         // Tentukan tujuan idle pertama kali
         MoveToRandomIdlePosition(); // Menambahkan pemanggilan ini di Start untuk memastikan idle langsung terjadi
     }
+
 
     void Update()
     {
@@ -127,7 +132,10 @@ public class GenderuwoLogic : MonoBehaviour
                 anim.SetBool("Run", false);  // Stop running animation
             }
 
-            // Jika sudah selesai transisi idle, cek apakah perlu bergerak ke tujuan idle acak
+            // Memperbarui timer untuk waktu menuju idle
+            idleMoveTimer += Time.deltaTime;
+
+            // Jika tidak sampai ke titik idle dalam waktu tertentu, pilih titik idle baru
             if (Vector3.Distance(transform.position, idleDestination) <= agent.stoppingDistance)
             {
                 Debug.Log("Arrived at idle destination.");
@@ -139,11 +147,22 @@ public class GenderuwoLogic : MonoBehaviour
                     isWaitingToLookAround = true;
                     waitTimer = 0f;
                 }
+
+                // Reset timer jika mencapai titik idle
+                idleMoveTimer = 0f;
             }
             else
             {
                 Debug.Log("Moving towards idle destination.");
                 anim.SetBool("Run", true);
+            }
+
+            // Cek apakah waktu yang dihabiskan untuk mencapai idle terlalu lama
+            if (idleMoveTimer >= maxIdleMoveTime)
+            {
+                Debug.Log("Not reaching idle destination in time. Selecting new idle position.");
+                MoveToRandomIdlePosition();  // Pilih titik idle baru
+                idleMoveTimer = 0f;  // Reset timer setelah memilih titik baru
             }
 
             if (isWaitingToLookAround)
