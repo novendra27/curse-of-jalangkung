@@ -53,6 +53,14 @@ public class GenderuwoLogic : MonoBehaviour
     public float maxIdleMoveTime = 5f; // Waktu maksimal yang diizinkan untuk mencapai tujuan idle
     private float idleMoveTimer = 0f; // Timer untuk melacak waktu menuju titik idle
 
+    [Header("Genderuwo Sound")]
+    public AudioClip GenderuwoAttack;
+    public AudioClip GenderuwoDeath;
+    public AudioClip GenderuwoStep;
+    public AudioClip GenderuwoHurt;
+    public AudioClip GenderuwoIdleYawn;
+    AudioSource GenderuwoAudio;
+
 
     public void TakeDamage(float damage)
     {
@@ -74,6 +82,11 @@ public class GenderuwoLogic : MonoBehaviour
 
         // Tentukan tujuan idle pertama kali
         MoveToRandomIdlePosition(); // Menambahkan pemanggilan ini di Start untuk memastikan idle langsung terjadi
+
+        GenderuwoAudio = this.GetComponent<AudioSource>();
+        GenderuwoAudio.spatialBlend = 1.0f; // Set to 3D sound
+        GenderuwoAudio.maxDistance = ChaseRange; // Set max distance to ChaseRange
+
     }
 
 
@@ -296,5 +309,41 @@ public class GenderuwoLogic : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, ChaseRange);
+    }
+
+    public void PlayGenderuwoAttack()
+    {
+        GenderuwoAudio.clip = GenderuwoAttack;
+        GenderuwoAudio.Play();
+    }
+
+    public void PlayGenderuwoDeath()
+    {
+        GenderuwoAudio.clip = GenderuwoDeath;
+        GenderuwoAudio.Play();
+    }
+
+    public void PlayGenderuwoStep()
+    {
+        if (Vector3.Distance(transform.position, target.position) <= ChaseRange)
+        {
+            GenderuwoAudio.clip = GenderuwoStep;
+            GenderuwoAudio.Play();
+        }
+    }
+
+    public void PlayGenderuwoHurt()
+    {
+        GenderuwoAudio.clip = GenderuwoHurt;
+        GenderuwoAudio.Play();
+    }
+
+    public void PlayGenderuwoIdleYawn()
+    {
+        if (Vector3.Distance(transform.position, target.position) <= ChaseRange)
+        {
+            GenderuwoAudio.clip = GenderuwoIdleYawn;
+            GenderuwoAudio.Play();
+        }
     }
 }
