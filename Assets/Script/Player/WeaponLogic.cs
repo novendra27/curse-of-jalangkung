@@ -31,15 +31,15 @@ public class WeaponLogic : MonoBehaviour
         if (Physics.Raycast(AIMViewPoint.position, AIMViewPoint.forward, out hit, range))
         {
             Debug.Log("I hit this thing: " + hit.transform.name);
-          /*  if (hit.transform.CompareTag("Enemy"))
-            {
-                // Mengambil komponen EnemyLogic pada musuh dan memberikan damage
-                EnemyLogic target = hit.transform.GetComponent<EnemyLogic>();
-                if (target != null)
-                {
-                    target.TakeDamage(photoDamage);
-                }
-            }*/
+              if (hit.transform.CompareTag("Enemy"))
+              {
+                  // Mengambil komponen EnemyLogic pada musuh dan memberikan damage
+                  GenderuwoLogic target = hit.transform.GetComponent<GenderuwoLogic>();
+                  if (target != null)
+                  {
+                      target.TakeDamage(photoDamage);
+                  }
+              }
         }
 
         yield return null;

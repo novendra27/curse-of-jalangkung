@@ -107,7 +107,7 @@ public class GenderuwoLogic : MonoBehaviour
         }
 
         DistancetoTarget = Vector3.Distance(target.position, transform.position);
-        Debug.Log("Distance to target: " + DistancetoTarget);
+        //Debug.Log("Distance to target: " + DistancetoTarget);
 
         if (DistancetoTarget <= ChaseRange && hitPoints > 0)
         {
@@ -181,7 +181,7 @@ public class GenderuwoLogic : MonoBehaviour
             if (isWaitingToLookAround)
             {
                 waitTimer += Time.deltaTime;
-                Debug.Log("Waiting to look around. Wait timer: " + waitTimer);
+                //Debug.Log("Waiting to look around. Wait timer: " + waitTimer);
                 if (waitTimer >= waitBeforeLookAround)
                 {
                     Debug.Log("Ready to start looking around.");
