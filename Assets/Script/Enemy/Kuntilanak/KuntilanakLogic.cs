@@ -50,19 +50,20 @@ public class KuntilanakLogic : MonoBehaviour
             FaceTarget(DefaultPosition);
             if (DistancetoDefault <= agent.stoppingDistance)
             {
-                Debug.Log("Time To Stop");
+                //Debug.Log("Time To Stop");
                 anim.SetBool("Run", false);
                 anim.SetBool("Attack", false);
             }
         }
     }
-
     public void TakeDamage(float damage)
     {
         hitPoints -= damage;
+        anim.SetTrigger("GetHit");
+        anim.SetFloat("HitPoints", hitPoints);
         if (hitPoints <= 0)
-        { 
-            Destroy(gameObject, 3f);
+        {
+            Destroy(gameObject, 0f);
         }
     }
 
