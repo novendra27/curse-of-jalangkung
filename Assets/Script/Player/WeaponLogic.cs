@@ -4,7 +4,7 @@ using UnityEngine;
 public class WeaponLogic : MonoBehaviour
 {
     [SerializeField] private Transform AIMViewPoint;    // Titik pandang kamera (AIMViewPoint)
-    [SerializeField] private float range = 1000f;       // Jarak serangan
+    [SerializeField] private float range = 10f;       // Jarak serangan
     [SerializeField] private int photoDamage = 50;      // Damage yang diberikan saat memotret
 
     private bool isInCameraMode = false;
