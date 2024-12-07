@@ -25,12 +25,18 @@ public class PlayerLogic : MonoBehaviour
     public AudioClip GetHitAudio;
     public AudioClip RunAudio;
 
+    [Header("UI")]
+    public UIGameplayLogic UIGameplay;
+    float MaxHealth;
+
 
     void Start()
     {
          rb = this.GetComponent<Rigidbody>();
       //  PlayerOrientation = this.GetComponent<Transform>();
         PlayerAudio = this.GetComponent<AudioSource>();
+        MaxHealth = HitPoints;
+        UIGameplay.UpdateHealthBar(HitPoints, MaxHealth);
 
     }
 
@@ -135,9 +141,10 @@ public void PlayerGetHit(float damage)
 {
     Debug.Log("Player Receive Damage - " + damage);
     HitPoints = HitPoints - damage;
+        UIGameplay.UpdateHealthBar(HitPoints, MaxHealth);
 
-    // Mainkan audio get hit
-    PlayerAudio.clip = GetHitAudio;
+        // Mainkan audio get hit
+        PlayerAudio.clip = GetHitAudio;
     PlayerAudio.Play();
     anim.SetTrigger("GetHit");
 
