@@ -380,7 +380,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203722970}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.050393503, y: 0.00086421025, z: -0.000043606, w: 0.9987291}
+  m_LocalRotation: {x: 0.044873666, y: 0.46463364, z: -0.02358441, w: 0.8840508}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -734,6 +734,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &581502506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 581502507}
+  m_Layer: 0
+  m_Name: SummonPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &581502507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581502506}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.86}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1996599383}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &637917329
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,7 +996,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 690278140}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.032266807, y: 0.0008648764, z: -0.000027921347, w: 0.99947894}
+  m_LocalRotation: {x: 0.028828317, y: 0.46498504, z: -0.015151401, w: 0.8847194}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2941,8 +2972,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1285109864}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.050393507, y: 0.000864193, z: -0.000043605145, w: 0.99872905}
-  m_LocalPosition: {x: -3.5043306, y: 11.530001, z: -10.5}
+  m_LocalRotation: {x: 0.04487366, y: 0.46463358, z: -0.023584407, w: 0.8840508}
+  m_LocalPosition: {x: -1.111516, y: 6.97, z: -7.649518}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3004,6 +3035,8 @@ MonoBehaviour:
   FlashLight: {fileID: 1735896860}
   FlashNormal: {fileID: 1903826141}
   anim: {fileID: 1996599386}
+  TPSMode: 1
+  AimMode: 0
   weaponLogic: {fileID: 736649378}
   fireRate: 1.5
   ShootAudio: {fileID: 8300000, guid: 51e90348f01b0ff4eb562a3f13fc42c0, type: 3}
@@ -3235,7 +3268,7 @@ Transform:
   m_GameObject: {fileID: 1286639100}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5043306, y: 11.530001, z: -10.5}
+  m_LocalPosition: {x: -1.111516, y: 6.97, z: -7.649518}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3520,7 +3553,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759318499}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06855153, y: 0.0008632914, z: -0.000059319522, w: 0.9976472}
+  m_LocalRotation: {x: 0.06094668, y: 0.4641278, z: -0.032031965, w: 0.8830883}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3906,7 +3939,7 @@ Transform:
   m_GameObject: {fileID: 1996599378}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.45, y: 9.93, z: -4.06}
+  m_LocalPosition: {x: 4.3, y: 5.37, z: -4.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3915,6 +3948,7 @@ Transform:
   - {fileID: 1820146400}
   - {fileID: 677753634}
   - {fileID: 188536398}
+  - {fileID: 581502507}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1996599384
@@ -3941,6 +3975,9 @@ MonoBehaviour:
   DeathAudio: {fileID: 8300000, guid: 8cbde45bf4ea38e4d839f71108d23c21, type: 3}
   GetHitAudio: {fileID: 8300000, guid: 1e3f816b354c1f942b4704ddda18f524, type: 3}
   RunAudio: {fileID: 8300000, guid: b97b10f8556b8634ea216b754cdf428c, type: 3}
+  jalangkungPrefab: {fileID: 4022303754158644088, guid: 8f0df91619f53ad44a235155bcfd5430, type: 3}
+  summonPoint: {fileID: 581502507}
+  summonKey: 106
 --- !u!82 &1996599385
 AudioSource:
   m_ObjectHideFlags: 0
