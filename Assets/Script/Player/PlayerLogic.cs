@@ -25,7 +25,11 @@ public class PlayerLogic : MonoBehaviour
     public AudioClip GetHitAudio;
     public AudioClip RunAudio;
 
+    [Header("Summon Jalangkung")]
 
+public GameObject jalangkungPrefab; // Prefab jalangkung yang akan di-summon
+public Transform summonPoint;       // Lokasi tempat jalangkung muncul relatif terhadap player
+public KeyCode summonKey = KeyCode.J; // Tombol untuk mensummon jalangkung
     void Start()
     {
          rb = this.GetComponent<Rigidbody>();
@@ -47,14 +51,33 @@ public class PlayerLogic : MonoBehaviour
         // Anda bisa mengubah nilai fallspeed untuk mempercepat atau memperlambat kecepatan jatuh karakter
     }//
         AimModeAdjuster();
-        if(Input.GetKeyDown(KeyCode.F))
+        if(Input.GetKeyDown(KeyCode.L))
         {
             PlayerGetHit(100f);
         } 
         if (Input.GetKeyDown(KeyCode.P)){
             PlayerGetHit(10f);
         }
+
+         if (Input.GetKeyDown(summonKey))
+    {
+        SummonJalangkung();
     }
+    }
+
+    private void SummonJalangkung()
+{
+    // Pastikan prefab dan summonPoint tidak null
+    if (jalangkungPrefab != null && summonPoint != null)
+    {
+        Instantiate(jalangkungPrefab, summonPoint.position, summonPoint.rotation);
+        Debug.Log("Jalangkung summoned!");
+    }
+    else
+    {
+        Debug.LogWarning("Jalangkung prefab or summon point is not assigned!");
+    }
+}
 private void step(){
     Debug.Log("step");
     PlayerAudio.clip = StepAudio;
@@ -151,8 +174,6 @@ public void PlayerGetHit(float damage)
 
     }
 }
-
-
 
 
 }
