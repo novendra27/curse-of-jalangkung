@@ -51,7 +51,7 @@ MonoBehaviour:
   hitPoints: 100
   turnSpeed: 15
   target: {fileID: 0}
-  ChaseRange: 5
+  ChaseRange: 2
 --- !u!95 &5644086898752054983
 Animator:
   serializedVersion: 5
