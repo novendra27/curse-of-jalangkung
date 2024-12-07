@@ -4,7 +4,7 @@ using UnityEngine;
 public class WeaponLogic : MonoBehaviour
 {
     [SerializeField] private Transform AIMViewPoint;    // Titik pandang kamera (AIMViewPoint)
-    [SerializeField] private float range = 1000f;       // Jarak serangan
+    [SerializeField] private float range = 10f;       // Jarak serangan
     [SerializeField] private int photoDamage = 50;      // Damage yang diberikan saat memotret
 
     private bool isInCameraMode = false;
@@ -31,7 +31,7 @@ public class WeaponLogic : MonoBehaviour
         if (Physics.Raycast(AIMViewPoint.position, AIMViewPoint.forward, out hit, range))
         {
             Debug.Log("I hit this thing: " + hit.transform.name);
-              if (hit.transform.CompareTag("Enemy"))
+              if (hit.transform.CompareTag("Genderuwo"))
               {
                   // Mengambil komponen EnemyLogic pada musuh dan memberikan damage
                   GenderuwoLogic target = hit.transform.GetComponent<GenderuwoLogic>();

@@ -94,14 +94,14 @@ public class GenderuwoLogic : MonoBehaviour
     {
         if (isDead && !isSinking)
         {
-            Debug.Log("Enemy is dead and not sinking. Checking death animation.");
+            // Debug.Log("Enemy is dead and not sinking. Checking death animation.");
             CheckDeathAnimation();
             return;
         }
 
         if (isSinking)
         {
-            Debug.Log("Enemy is sinking.");
+            // Debug.Log("Enemy is sinking.");
             SinkIntoGround();
             return;
         }
@@ -111,7 +111,7 @@ public class GenderuwoLogic : MonoBehaviour
 
         if (DistancetoTarget <= ChaseRange && hitPoints > 0)
         {
-            Debug.Log("Target in chase range. DistancetoTarget: " + DistancetoTarget);
+            // Debug.Log("Target in chase range. DistancetoTarget: " + DistancetoTarget);
             // Reset idle transition jika sedang mengejar target
             wasChasing = true;
             idleTransitionTimer = 0f;
@@ -121,12 +121,12 @@ public class GenderuwoLogic : MonoBehaviour
 
             if (DistancetoTarget > agent.stoppingDistance)
             {
-                Debug.Log("Chasing target. Distance is greater than stopping distance.");
+                // Debug.Log("Chasing target. Distance is greater than stopping distance.");
                 ChaseTarget();
             }
             else if (DistancetoTarget <= agent.stoppingDistance)
             {
-                Debug.Log("Target within attack range. Attacking.");
+                // Debug.Log("Target within attack range. Attacking.");
                 Attack();
             }
         }
@@ -135,7 +135,7 @@ public class GenderuwoLogic : MonoBehaviour
             // Reset jika target sudah tidak dalam jangkauan pengejaran
             if (wasChasing)
             {
-                Debug.Log("Target lost. Transitioning to idle mode.");
+                // Debug.Log("Target lost. Transitioning to idle mode.");
                 wasChasing = false;
                 idleTransitionTimer = 0f;  // Reset idle timer
 
@@ -151,12 +151,12 @@ public class GenderuwoLogic : MonoBehaviour
             // Jika tidak sampai ke titik idle dalam waktu tertentu, pilih titik idle baru
             if (Vector3.Distance(transform.position, idleDestination) <= agent.stoppingDistance)
             {
-                Debug.Log("Arrived at idle destination.");
+                // Debug.Log("Arrived at idle destination.");
                 anim.SetBool("Run", false);
 
                 if (!isLookingAround && !isWaitingToLookAround)
                 {
-                    Debug.Log("Waiting to look around.");
+                    // Debug.Log("Waiting to look around.");
                     isWaitingToLookAround = true;
                     waitTimer = 0f;
                 }
@@ -166,14 +166,14 @@ public class GenderuwoLogic : MonoBehaviour
             }
             else
             {
-                Debug.Log("Moving towards idle destination.");
+                // Debug.Log("Moving towards idle destination.");
                 anim.SetBool("Run", true);
             }
 
             // Cek apakah waktu yang dihabiskan untuk mencapai idle terlalu lama
             if (idleMoveTimer >= maxIdleMoveTime)
             {
-                Debug.Log("Not reaching idle destination in time. Selecting new idle position.");
+                // Debug.Log("Not reaching idle destination in time. Selecting new idle position.");
                 MoveToRandomIdlePosition();  // Pilih titik idle baru
                 idleMoveTimer = 0f;  // Reset timer setelah memilih titik baru
             }
@@ -184,7 +184,7 @@ public class GenderuwoLogic : MonoBehaviour
                 //Debug.Log("Waiting to look around. Wait timer: " + waitTimer);
                 if (waitTimer >= waitBeforeLookAround)
                 {
-                    Debug.Log("Ready to start looking around.");
+                    // Debug.Log("Ready to start looking around.");
                     isWaitingToLookAround = false;
                     isLookingAround = true;
                     lookAroundTimer = 0f;
@@ -196,7 +196,7 @@ public class GenderuwoLogic : MonoBehaviour
 
             if (isLookingAround)
             {
-                Debug.Log("Looking around.");
+                // Debug.Log("Looking around.");
                 LookAround();
 
                 // Setelah selesai looking around, kembali ke mode idle
