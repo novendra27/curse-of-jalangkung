@@ -15,7 +15,7 @@ public class CameraLogic : MonoBehaviour
     private int originalPlayerLayer;
     private int aimLayer;
 
-    private bool TPSMode = true, AimMode = false;
+    public bool TPSMode = true, AimMode = false;
     private float flashDuration = 0.1f; // Durasi flash
     public WeaponLogic weaponLogic; // Hubungkan secara manual di Inspector
 

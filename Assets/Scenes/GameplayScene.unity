@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -268,7 +268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 423651130}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.050153054, y: 0.096448176, z: -0.004866066, w: 0.99406177}
+  m_LocalRotation: {x: 0.050153047, y: 0.09644833, z: -0.004866074, w: 0.99406177}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1387,6 +1387,8 @@ MonoBehaviour:
   FlashLight: {fileID: 1100892230}
   FlashNormal: {fileID: 1095350724}
   anim: {fileID: 2073369019}
+  TPSMode: 1
+  AimMode: 0
   weaponLogic: {fileID: 581826623}
   fireRate: 1.5
   ShootAudio: {fileID: 8300000, guid: 51e90348f01b0ff4eb562a3f13fc42c0, type: 3}
@@ -1491,8 +1493,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 617972572}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.050153073, y: 0.09644818, z: -0.004866068, w: 0.99406177}
-  m_LocalPosition: {x: -3.2576826, y: 11.530001, z: -9.298367}
+  m_LocalRotation: {x: 0.050153054, y: 0.09644834, z: -0.0048660743, w: 0.9940617}
+  m_LocalPosition: {x: -3.2576847, y: 11.530001, z: -9.298367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1569,7 +1571,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 694053318}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06822622, y: 0.09634373, z: -0.006619604, w: 0.992985}
+  m_LocalRotation: {x: 0.068226226, y: 0.09634386, z: -0.0066196145, w: 0.992985}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1994,7 +1996,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 993761248}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.032111075, y: 0.09652059, z: -0.0031155555, w: 0.994808}
+  m_LocalRotation: {x: 0.03211107, y: 0.096520714, z: -0.0031155592, w: 0.994808}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2494,6 +2496,7 @@ MonoBehaviour:
   EnemiesPrefabs:
   - {fileID: 3060618924253637032, guid: acc77ef970ea78f419c30aacf906f785, type: 3}
   - {fileID: 3722741659724440439, guid: 3ccc6a712aed3bd4591ccb51f09d32da, type: 3}
+  - {fileID: 5904732029132264560, guid: 9e3c855bb08240d4293ac98376bcd80a, type: 3}
   EnemyCount: 30
   RoomCount: 3
   RoomMinSize: 6
@@ -2716,7 +2719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 3.44216, z: -2.779182}
+  m_FollowOffset: {x: 0, y: 2.008333, z: -2.84999}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -2922,7 +2925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 3.44216, z: -2.779182}
+  m_FollowOffset: {x: 0, y: 2.008333, z: -2.84999}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -3128,7 +3131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 3.44216, z: -2.779182}
+  m_FollowOffset: {x: 0, y: 2.008333, z: -2.84999}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -3605,7 +3608,7 @@ Transform:
   m_GameObject: {fileID: 1976302518}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.2576826, y: 11.530001, z: -9.298367}
+  m_LocalPosition: {x: -3.2576847, y: 11.530001, z: -9.298367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
