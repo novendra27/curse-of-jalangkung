@@ -27,6 +27,10 @@ public class PlayerLogic : MonoBehaviour
 
     [Header("Summon Jalangkung")]
 
+    [Header("UI")]
+    public UIGameplayLogic UIGameplay;
+    float MaxHealth;
+
 public GameObject jalangkungPrefab; // Prefab jalangkung yang akan di-summon
 public Transform summonPoint;       // Lokasi tempat jalangkung muncul relatif terhadap player
 public KeyCode summonKey = KeyCode.J; // Tombol untuk mensummon jalangkung
@@ -35,6 +39,8 @@ public KeyCode summonKey = KeyCode.J; // Tombol untuk mensummon jalangkung
          rb = this.GetComponent<Rigidbody>();
       //  PlayerOrientation = this.GetComponent<Transform>();
         PlayerAudio = this.GetComponent<AudioSource>();
+        MaxHealth = HitPoints;
+        UIGameplay.UpdateHealthBar(HitPoints, MaxHealth);
 
     }
 
@@ -158,9 +164,10 @@ public void PlayerGetHit(float damage)
 {
     Debug.Log("Player Receive Damage - " + damage);
     HitPoints = HitPoints - damage;
+        UIGameplay.UpdateHealthBar(HitPoints, MaxHealth);
 
-    // Mainkan audio get hit
-    PlayerAudio.clip = GetHitAudio;
+        // Mainkan audio get hit
+        PlayerAudio.clip = GetHitAudio;
     PlayerAudio.Play();
     anim.SetTrigger("GetHit");
 
