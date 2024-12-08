@@ -6,7 +6,11 @@ public class JalangkungLogic : MonoBehaviour
     public float destructionTime = 5f; // Waktu channeling sebelum jalangkung hancur
     private bool playerInRange = false;
     private bool isBeingDestroyed = false;
+    private float CurrentTotem = 0;
+    private float maxTotem = 5;
     private float channelingTimer = 0f;
+    public GameObject PanelMessage;
+    public UIGameplayLogic GameplayLogic;
 
     [Header("Player Reference")]
     public GameObject player; // Referensi untuk objek player
@@ -31,6 +35,7 @@ public class JalangkungLogic : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(playerInRange);
         if (playerInRange && Input.GetKey(KeyCode.F))
         {
             if (!isBeingDestroyed)
@@ -44,6 +49,8 @@ public class JalangkungLogic : MonoBehaviour
                 if (channelingTimer >= destructionTime)
                 {
                     DestroyJalangkung();
+                    CurrentTotem++;
+                    GameplayLogic.UpdateCountTotem(CurrentTotem, maxTotem); ///
                 }
             }
         }
@@ -58,6 +65,8 @@ public class JalangkungLogic : MonoBehaviour
     {
         isBeingDestroyed = true;
         channelingTimer = 0f;
+
+        //menambah sidebar channeling
 
         // Mainkan audio channeling
      /*   if (channelingAudio != null)
@@ -83,9 +92,29 @@ public class JalangkungLogic : MonoBehaviour
         Debug.Log("Channeling stopped.");
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerInRange = true;
+            PanelMessage.SetActive(true);
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerInRange = false;
+            StopChanneling();
+            PanelMessage.SetActive(false);
+        }
+    }
+
     private void DestroyJalangkung()
     {
         Debug.Log("Jalangkung destroyed!");
+        PanelMessage.SetActive(false);
 
         // Mainkan efek penghancuran
         if (destructionEffect != null)
