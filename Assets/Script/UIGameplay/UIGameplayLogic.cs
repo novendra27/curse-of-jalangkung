@@ -10,7 +10,6 @@ public class UIGameplayLogic : MonoBehaviour
 {
     public Image HealthBar;
     public TextMeshProUGUI HealthText;
-    public TextMeshProUGUI CountTotem;
     //public GameObject PanelGameResult;
     //public TextMeshProUGUI GameResultText;
 
@@ -22,43 +21,32 @@ public class UIGameplayLogic : MonoBehaviour
         //if (CurrentHealth <= 0) GameResult(false);
     }
 
-    public void UpdateCountTotem(float CurrentTotem, float MaxTotem){
-        CountTotem.text = CurrentTotem + " / " + MaxTotem;
-    }
+    //public void GameResult(bool win)
+    //{
+    //    PanelGameResult.SetActive(true);
+    //    Cursor.lockState = CursorLockMode.None;
+    //    Cursor.visible = true;
+    //    if (win)
+    //    {
+    //        GameResultText.color = Color.green;
+    //        GameResultText.text = "You Win!";
+    //    }
+    //    else
+    //    {
+    //        GameResultText.color = Color.red;
+    //        GameResultText.text = "You Lose!";
+    //    }
+    //}
 
-    // public void UpdateSideBarChanneling(float CurrentHealth, float MaxHealth)
-    // {
-    //     HealthBar.fillAmount = CurrentHealth / MaxHealth;
-
-    //     //if (CurrentHealth <= 0) GameResult(false);
-    // }
-
-    public void GameResult(bool win)
-    {
-       PanelGameResult.SetActive(true);
-       Cursor.lockState = CursorLockMode.None;
-       Cursor.visible = true;
-       if (win)
-       {
-           GameResultText.color = Color.green;
-           GameResultText.text = "You Win!";
-       }
-       else
-       {
-           GameResultText.color = Color.red;
-           GameResultText.text = "You Lose!";
-       }
-    }
-
-    public void GameResultDecision(bool TryAgain)
-    {
-       if (TryAgain)
-       {
-           SceneManager.LoadScene("Maze");
-       }
-       else
-       {
-           SceneManager.LoadScene("MainMenu");
-       }
-    }
+    //public void GameResultDecision(bool TryAgain)
+    //{
+    //    if (TryAgain)
+    //    {
+    //        SceneManager.LoadScene("Maze");
+    //    }
+    //    else
+    //    {
+    //        SceneManager.LoadScene("MainMenu");
+    //    }
+    //}
 }
