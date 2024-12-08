@@ -52,7 +52,7 @@ MonoBehaviour:
   hitPoints: 100
   turnSpeed: 15
   target: {fileID: 0}
-  ChaseRange: 5
+  ChaseRange: 8
   idleMoveRadius: 3
   idleMoveSpeed: 1
   normalMoveSpeed: 3.5
@@ -100,7 +100,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1.48
-  m_Speed: 3.5
+  m_Speed: 4.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
