@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class KuntilanakLogic : MonoBehaviour
 {
     [Header("Enemy Setting")]
-    public float hitPoints = 100f;
     public float turnSpeed = 15f;
     public Transform target;
     public float ChaseRange;
@@ -21,48 +20,43 @@ public class KuntilanakLogic : MonoBehaviour
         target = FindAnyObjectByType<PlayerLogic>().transform;
         agent = this.GetComponent<NavMeshAgent>();
         anim = this.GetComponentInChildren<Animator>();
-        anim.SetFloat("HitPoints", hitPoints);
         DefaultPosition = this.transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
         DistancetoTarget = Vector3.Distance(target.position, transform.position);
         DistancetoDefault = Vector3.Distance(DefaultPosition, transform.position);
 
-        if (DistancetoTarget <= ChaseRange && hitPoints != 0)
+        if (DistancetoTarget <= ChaseRange)
         {
-            FaceTarget(target.position);
-            if (DistancetoTarget > agent.stoppingDistance + 2f)
+            if (DistancetoTarget <= ChaseRange / 2) // Chase when distance is less than half of chase range
             {
-                ChaseTarget();
+                if (DistancetoTarget > agent.stoppingDistance + 2f)
+                {
+                    ChaseTarget();
+                }
+                else if (DistancetoTarget <= agent.stoppingDistance)
+                {
+                    Attack();
+                }
             }
-            else if (DistancetoTarget <= agent.stoppingDistance)
+            else // Just face the target when in range but further than half chase range
             {
-                Attack();
+                FaceTarget(target.position);
+                anim.SetBool("Run", false);
+                anim.SetBool("Attack", false);
             }
-
         }
-        else if (DistancetoTarget >= ChaseRange * 2)
+        else // Return to default position when out of range
         {
             agent.SetDestination(DefaultPosition);
             FaceTarget(DefaultPosition);
             if (DistancetoDefault <= agent.stoppingDistance)
             {
-                Debug.Log("Time To Stop");
                 anim.SetBool("Run", false);
                 anim.SetBool("Attack", false);
             }
-        }
-    }
-
-    public void TakeDamage(float damage)
-    {
-        hitPoints -= damage;
-        if (hitPoints <= 0)
-        { 
-            Destroy(gameObject, 3f);
         }
     }
 
@@ -83,7 +77,6 @@ public class KuntilanakLogic : MonoBehaviour
 
     public void Attack()
     {
-        Debug.Log("Attack");
         anim.SetBool("Run", false);
         anim.SetBool("Attack", true);
         Destroy(gameObject, 2f);
@@ -100,5 +93,8 @@ public class KuntilanakLogic : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, ChaseRange);
+        // Drawing inner circle to show chase threshold
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, ChaseRange/2);
     }
 }

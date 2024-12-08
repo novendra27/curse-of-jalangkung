@@ -15,7 +15,6 @@ public class GenderuwoLogic : MonoBehaviour
 
     // Variabel untuk idle movement
     public float idleMoveRadius = 5f;
-    //private float idleMoveTimer = 0f;
     private Vector3 idleDestination;
     public float idleMoveSpeed = 1f;
     public float normalMoveSpeed = 3.5f;
@@ -45,6 +44,24 @@ public class GenderuwoLogic : MonoBehaviour
     public float sinkSpeed = 1f; // Kecepatan tenggelam
     public float sinkDepth = -1f; // Kedalaman tenggelam sebelum dihapus
 
+    // Tambahan variabel untuk mengontrol transisi dari chase ke idle
+    private bool wasChasing = false;
+    public float idleTransitionDelay = 1f; // Waktu jeda sebelum memulai idle movement setelah chase
+    private float idleTransitionTimer = 0f;
+
+
+    public float maxIdleMoveTime = 5f; // Waktu maksimal yang diizinkan untuk mencapai tujuan idle
+    private float idleMoveTimer = 0f; // Timer untuk melacak waktu menuju titik idle
+
+    [Header("Genderuwo Sound")]
+    public AudioClip GenderuwoAttack;
+    public AudioClip GenderuwoDeath;
+    public AudioClip GenderuwoStep;
+    public AudioClip GenderuwoHurt;
+    public AudioClip GenderuwoIdleYawn;
+    AudioSource GenderuwoAudio;
+
+
     public void TakeDamage(float damage)
     {
         hitPoints -= damage;
@@ -64,62 +81,110 @@ public class GenderuwoLogic : MonoBehaviour
         anim.SetFloat("HitPoints", hitPoints);
 
         // Tentukan tujuan idle pertama kali
-        MoveToRandomIdlePosition();
+        MoveToRandomIdlePosition(); // Menambahkan pemanggilan ini di Start untuk memastikan idle langsung terjadi
+
+        GenderuwoAudio = this.GetComponent<AudioSource>();
+        GenderuwoAudio.spatialBlend = 1.0f; // Set to 3D sound
+        GenderuwoAudio.maxDistance = ChaseRange; // Set max distance to ChaseRange
+
     }
+
 
     void Update()
     {
         if (isDead && !isSinking)
         {
+            // Debug.Log("Enemy is dead and not sinking. Checking death animation.");
             CheckDeathAnimation();
             return;
         }
 
         if (isSinking)
         {
+            // Debug.Log("Enemy is sinking.");
             SinkIntoGround();
             return;
         }
 
         DistancetoTarget = Vector3.Distance(target.position, transform.position);
+        //Debug.Log("Distance to target: " + DistancetoTarget);
 
         if (DistancetoTarget <= ChaseRange && hitPoints > 0)
         {
+            // Debug.Log("Target in chase range. DistancetoTarget: " + DistancetoTarget);
+            // Reset idle transition jika sedang mengejar target
+            wasChasing = true;
+            idleTransitionTimer = 0f;
+
             agent.speed = normalMoveSpeed;
             FaceTarget(target.position);
-            if (DistancetoTarget > agent.stoppingDistance + 2f)
+
+            if (DistancetoTarget > agent.stoppingDistance)
             {
+                // Debug.Log("Chasing target. Distance is greater than stopping distance.");
                 ChaseTarget();
             }
             else if (DistancetoTarget <= agent.stoppingDistance)
             {
+                // Debug.Log("Target within attack range. Attacking.");
                 Attack();
             }
         }
         else
         {
-            agent.speed = idleMoveSpeed;
+            // Reset jika target sudah tidak dalam jangkauan pengejaran
+            if (wasChasing)
+            {
+                // Debug.Log("Target lost. Transitioning to idle mode.");
+                wasChasing = false;
+                idleTransitionTimer = 0f;  // Reset idle timer
 
+                // Setelah kehilangan target, langsung ke mode idle
+                agent.speed = idleMoveSpeed;
+                MoveToRandomIdlePosition();  // Mengatur posisi idle secara acak
+                anim.SetBool("Run", false);  // Stop running animation
+            }
+
+            // Memperbarui timer untuk waktu menuju idle
+            idleMoveTimer += Time.deltaTime;
+
+            // Jika tidak sampai ke titik idle dalam waktu tertentu, pilih titik idle baru
             if (Vector3.Distance(transform.position, idleDestination) <= agent.stoppingDistance)
             {
+                // Debug.Log("Arrived at idle destination.");
                 anim.SetBool("Run", false);
 
                 if (!isLookingAround && !isWaitingToLookAround)
                 {
+                    // Debug.Log("Waiting to look around.");
                     isWaitingToLookAround = true;
                     waitTimer = 0f;
                 }
+
+                // Reset timer jika mencapai titik idle
+                idleMoveTimer = 0f;
             }
             else
             {
+                // Debug.Log("Moving towards idle destination.");
                 anim.SetBool("Run", true);
+            }
+
+            // Cek apakah waktu yang dihabiskan untuk mencapai idle terlalu lama
+            if (idleMoveTimer >= maxIdleMoveTime)
+            {
+                // Debug.Log("Not reaching idle destination in time. Selecting new idle position.");
+                MoveToRandomIdlePosition();  // Pilih titik idle baru
+                idleMoveTimer = 0f;  // Reset timer setelah memilih titik baru
             }
 
             if (isWaitingToLookAround)
             {
                 waitTimer += Time.deltaTime;
+                //Debug.Log("Waiting to look around. Wait timer: " + waitTimer);
                 if (waitTimer >= waitBeforeLookAround)
                 {
+                    // Debug.Log("Ready to start looking around.");
                     isWaitingToLookAround = false;
                     isLookingAround = true;
                     lookAroundTimer = 0f;
@@ -131,15 +196,19 @@ public class GenderuwoLogic : MonoBehaviour
 
             if (isLookingAround)
             {
+                // Debug.Log("Looking around.");
                 LookAround();
-            }
 
-            if (!isLookingAround && !isWaitingToLookAround && Vector3.Distance(transform.position, idleDestination) <= agent.stoppingDistance)
-            {
-                MoveToRandomIdlePosition();
+                // Setelah selesai looking around, kembali ke mode idle
+                if (lookAroundTimer >= lookAroundDuration)
+                {
+                    isLookingAround = false;
+                    MoveToRandomIdlePosition();  // Pindah ke posisi idle acak setelah selesai looking around
+                }
             }
         }
     }
+
 
     void MoveToRandomIdlePosition()
     {
@@ -239,6 +308,42 @@ public class GenderuwoLogic : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, idleMoveRadius);
+        Gizmos.DrawWireSphere(transform.position, ChaseRange);
+    }
+
+    public void PlayGenderuwoAttack()
+    {
+        GenderuwoAudio.clip = GenderuwoAttack;
+        GenderuwoAudio.Play();
+    }
+
+    public void PlayGenderuwoDeath()
+    {
+        GenderuwoAudio.clip = GenderuwoDeath;
+        GenderuwoAudio.Play();
+    }
+
+    public void PlayGenderuwoStep()
+    {
+        if (Vector3.Distance(transform.position, target.position) <= ChaseRange)
+        {
+            GenderuwoAudio.clip = GenderuwoStep;
+            GenderuwoAudio.Play();
+        }
+    }
+
+    public void PlayGenderuwoHurt()
+    {
+        GenderuwoAudio.clip = GenderuwoHurt;
+        GenderuwoAudio.Play();
+    }
+
+    public void PlayGenderuwoIdleYawn()
+    {
+        if (Vector3.Distance(transform.position, target.position) <= ChaseRange)
+        {
+            GenderuwoAudio.clip = GenderuwoIdleYawn;
+            GenderuwoAudio.Play();
+        }
     }
 }
