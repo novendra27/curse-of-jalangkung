@@ -2,24 +2,7 @@ using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 
-// public class MapLocation
-// {
-//     public int x;
-//     public int z;
-
-//     public MapLocation(int _x, int _z)
-//     {
-//         x = _x;
-//         z = _z;
-//     }
-
-//     public override string ToString()
-//     {
-//         return $"({x}, {z})";
-//     }
-// }
-
-public class MazeLogic : MonoBehaviour
+public class MazeGenerator : MonoBehaviour
 {
     public int width = 30;
     public int depth = 30;
@@ -32,16 +15,18 @@ public class MazeLogic : MonoBehaviour
     public List<GameObject> EnemiesPrefabs;  // List objek musuh
     public int EnemyCount = 3;
     public int RoomCount = 3;
-    public int RoomMinSize = 6;
-    public int RoomMaxSize = 10;
+    public int RoomMinSize = 3;  // Reduced room minimum size
+    public int RoomMaxSize = 5;  // Reduced room maximum size
     public GameObject Totem;  // GameObject totem
     public NavMeshSurface surface;
+
+    private static System.Random rng = new System.Random();
 
     // Start is called before the first frame update
     void Start()
     {
         InitializeMap();
-        GenerateMaps();
+        GenerateMaze(5, 5);  // Start generating the maze with DFS
         AddRooms(RoomCount, RoomMinSize, RoomMaxSize);
         DrawMaps();
         surface.BuildNavMesh();  // Build NavMesh sebelum penempatan karakter, musuh, dan totem
@@ -51,10 +36,7 @@ public class MazeLogic : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
+    void Update() { }
 
     void InitializeMap()
     {
@@ -69,18 +51,38 @@ public class MazeLogic : MonoBehaviour
         }
     }
 
-    public virtual void GenerateMaps()
+    void GenerateMaze(int x, int z)
     {
-        for (int z = 0; z < depth; z++)
+        if (CountSquareNeighbors(x, z) >= 2) return;
+        map[x, z] = 0;  // Mark the cell as part of the maze (empty space)
+
+        var directions = new List<MapLocation>
         {
-            for (int x = 0; x < width; x++)
-            {
-                if (Random.Range(0, 100) < 50)
-                {
-                    map[x, z] = 0;  // Menandakan bahwa ini adalah ruang kosong (lantai)
-                }
-                Debug.Log("Setting map[" + x + ", " + z + "] = " + map[x, z]);
-            }
+            new MapLocation(1, 0),
+            new MapLocation(0, 1),
+            new MapLocation(-1, 0),
+            new MapLocation(0, -1)
+        };
+
+        Shuffle(directions);
+
+        GenerateMaze(x + directions[0].x, z + directions[0].z);
+        GenerateMaze(x + directions[1].x, z + directions[1].z);
+        GenerateMaze(x + directions[2].x, z + directions[2].z);
+        GenerateMaze(x + directions[3].x, z + directions[3].z);
+    }
+
+    // Shuffle function for randomizing directions
+    void Shuffle<T>(List<T> list)
+    {
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
         }
     }
 
@@ -96,8 +98,7 @@ public class MazeLogic : MonoBehaviour
                     GameObject wall = Instantiate(Cube[Random.Range(0, Cube.Count)], position, Quaternion.identity);
                     wall.transform.localScale = new Vector3(scale, scale, scale);
                 }
-                else 
-                //  if (map[x, z] == 0)  // Jika lokasi adalah ruang kosong (lantai)
+                else
                 {
                     Vector3 position = new Vector3(x * scale, 0, z * scale);
                     GameObject floor = Instantiate(FloorPrefabs[Random.Range(0, FloorPrefabs.Count)], position, Quaternion.identity);
@@ -111,7 +112,7 @@ public class MazeLogic : MonoBehaviour
         }
     }
 
-    public virtual void PlaceCharacter()
+    public void PlaceCharacter()
     {
         bool PlayerSet = false;
         for (int i = 0; i < depth; i++)
@@ -137,7 +138,6 @@ public class MazeLogic : MonoBehaviour
         }
     }
 
-    // Memeriksa apakah area dalam radius 3x3 sekitar posisi kosong dari musuh
     bool IsEmptyAreaForCharacter(int x, int z)
     {
         for (int i = -1; i <= 1; i++)
@@ -161,7 +161,7 @@ public class MazeLogic : MonoBehaviour
         return true;  // Area 3x3 kosong dari musuh
     }
 
-    public virtual void PlaceEnemies()
+    public void PlaceEnemies()
     {
         int EnemySet = 0;
         while (EnemySet < EnemyCount)
@@ -199,8 +199,7 @@ public class MazeLogic : MonoBehaviour
         }
     }
 
-    // Menempatkan totem di lokasi acak
-    public virtual void PlaceTotem()
+    public void PlaceTotem()
     {
         int x = Random.Range(0, width);
         int z = Random.Range(0, depth);
@@ -225,7 +224,7 @@ public class MazeLogic : MonoBehaviour
         return count;
     }
 
-    public virtual void AddRooms(int count, int minSize, int maxSize)
+    public void AddRooms(int count, int minSize, int maxSize)
     {
         for (int c = 0; c < count; c++)
         {
@@ -241,5 +240,22 @@ public class MazeLogic : MonoBehaviour
                 }
             }
         }
+    }
+}
+
+public class MapLocation
+{
+    public int x;
+    public int z;
+
+    public MapLocation(int _x, int _z)
+    {
+        x = _x;
+        z = _z;
+    }
+
+    public override string ToString()
+    {
+        return $"({x}, {z})";
     }
 }
