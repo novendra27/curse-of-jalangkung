@@ -15,6 +15,9 @@ public class UIGameplayLogic : MonoBehaviour
     public Button buttonMenu;
     public GameObject panelMenu; // Panel yang ingin dibuka/tutup
 
+    public GameObject panelPopUp;  // Referensi ke panel pop-up
+    public float displayDuration = 6f;  // Durasi tampilan panel pop-up (dalam detik)
+
     public void Update()
     {
         // Cek jika tombol ESC ditekan
@@ -39,6 +42,31 @@ public class UIGameplayLogic : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        // Panggil metode untuk menampilkan panel pop-up saat scene dimulai
+        ShowPopUp();
+    }
+
+    // Metode untuk menampilkan pop-up
+    private void ShowPopUp()
+    {
+        if (panelPopUp != null)
+        {
+            panelPopUp.SetActive(true);  // Menampilkan panel pop-up
+            StartCoroutine(HidePopUpAfterDelay());  // Mulai coroutine untuk menyembunyikan panel setelah delay
+        }
+    }
+
+    // Coroutine untuk menyembunyikan panel setelah beberapa detik
+    private IEnumerator HidePopUpAfterDelay()
+    {
+        yield return new WaitForSeconds(displayDuration);  // Tunggu selama `displayDuration` detik
+        if (panelPopUp != null)
+        {
+            panelPopUp.SetActive(false);  // Menyembunyikan panel pop-up setelah 10 detik
+        }
+    }
 
     public void UpdateHealthBar(float CurrentHealth, float MaxHealth)
     {
