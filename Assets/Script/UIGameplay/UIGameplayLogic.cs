@@ -12,6 +12,33 @@ public class UIGameplayLogic : MonoBehaviour
     public TextMeshProUGUI HealthText;
     //public GameObject PanelGameResult;
     //public TextMeshProUGUI GameResultText;
+    public Button buttonMenu;
+    public GameObject panelMenu; // Panel yang ingin dibuka/tutup
+
+    public void Update()
+    {
+        // Cek jika tombol ESC ditekan
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (panelMenu != null)
+            {
+                // Jika panel aktif, tutup panel
+                if (panelMenu.activeSelf)
+                {
+                    panelMenu.SetActive(false);
+                }
+                else
+                {
+                    // Jika panel tidak aktif, panggil metode onClick pada button
+                    if (buttonMenu != null)
+                    {
+                        buttonMenu.onClick.Invoke();
+                    }
+                }
+            }
+        }
+    }
+
 
     public void UpdateHealthBar(float CurrentHealth, float MaxHealth)
     {
