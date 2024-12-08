@@ -31,9 +31,9 @@ public class PlayerLogic : MonoBehaviour
     public UIGameplayLogic UIGameplay;
     float MaxHealth;
 
-public GameObject jalangkungPrefab; // Prefab jalangkung yang akan di-summon
-public Transform summonPoint;       // Lokasi tempat jalangkung muncul relatif terhadap player
-public KeyCode summonKey = KeyCode.J; // Tombol untuk mensummon jalangkung
+    public GameObject jalangkungPrefab; // Prefab jalangkung yang akan di-summon
+    public Transform summonPoint;       // Lokasi tempat jalangkung muncul relatif terhadap player
+    public KeyCode summonKey = KeyCode.J; // Tombol untuk mensummon jalangkung
     void Start()
     {
          rb = this.GetComponent<Rigidbody>();
