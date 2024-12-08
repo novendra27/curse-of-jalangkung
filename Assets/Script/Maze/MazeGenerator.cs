@@ -18,6 +18,7 @@ public class MazeGenerator : MonoBehaviour
     public int RoomMinSize = 3;  // Reduced room minimum size
     public int RoomMaxSize = 5;  // Reduced room maximum size
     public GameObject Totem;  // GameObject totem
+    public int TotemCount = 5;
     public NavMeshSurface surface;
 
     private static System.Random rng = new System.Random();
@@ -201,17 +202,23 @@ public class MazeGenerator : MonoBehaviour
 
     public void PlaceTotem()
     {
-        int x = Random.Range(0, width);
-        int z = Random.Range(0, depth);
-        while (map[x, z] != 0)  // Pastikan totem ditempatkan di ruang kosong
+        for (int i = 0; i < TotemCount; i++)
         {
-            x = Random.Range(0, width);
-            z = Random.Range(0, depth);
-        }
+            int x = Random.Range(0, width);
+            int z = Random.Range(0, depth);
 
-        Debug.Log("Placing totem at " + x + ", " + z);
-        Instantiate(Totem, new Vector3(x * scale, 0, z * scale), Quaternion.identity);
+            // Ensure totem is placed in an empty space (not a wall or already occupied by another totem)
+            while (map[x, z] != 0)
+            {
+                x = Random.Range(0, width);
+                z = Random.Range(0, depth);
+            }
+
+            Debug.Log("Placing totem " + (i + 1) + " at " + x + ", " + z);
+            Instantiate(Totem, new Vector3(x * scale, 0, z * scale), Quaternion.identity);
+        }
     }
+
 
     public int CountSquareNeighbors(int x, int z)
     {
