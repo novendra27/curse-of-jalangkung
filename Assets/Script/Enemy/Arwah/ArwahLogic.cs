@@ -14,6 +14,11 @@ public class ArwahLogic : MonoBehaviour
     public float maxIdleMoveTime = 5f;
     public float turnSpeed = 2f;
     
+    public float slowRadius = 5f; // Radius dalam meter di mana efek slow diberikan
+    public float walkSlowFactor = 10f; // Faktor pengurangan kecepatan berjalan
+    public float runSlowFactor = 20f; // Faktor pengurangan kecepatan berlari
+    private PlayerLogic playerLogic; // Referensi ke PlayerLogic
+
     private CameraLogic cameraLogic; // Referensi ke CameraLogic
     private Renderer[] arwahRenderers; // Referensi ke semua Renderer Arwah
 
@@ -23,7 +28,11 @@ public class ArwahLogic : MonoBehaviour
         agent = this.GetComponent<UnityEngine.AI.NavMeshAgent>();
         arwahRenderers = this.GetComponentsInChildren<Renderer>(); // Inisialisasi semua Renderer
         cameraLogic = FindObjectOfType<CameraLogic>(); // Temukan CameraLogic di scene
-
+        playerLogic = FindObjectOfType<PlayerLogic>(); // Temukan PlayerLogic di scene
+    if (playerLogic == null)
+    {
+        Debug.LogError("PlayerLogic not found in the scene!");
+    }
         MoveToRandomIdlePosition();
     }
 
@@ -58,6 +67,20 @@ public class ArwahLogic : MonoBehaviour
             idleMoveTimer = 0f;
             MoveToRandomIdlePosition();
         }
+        
+        if (playerLogic != null)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, playerLogic.transform.position);
+
+            if (distanceToPlayer <= slowRadius)
+            {
+                ApplySlowEffect(); // Terapkan efek slow ke player
+            }
+            else
+            {
+                RemoveSlowEffect(); // Hapus efek slow jika player keluar radius
+            }
+        }
     }
 
     void MoveToRandomIdlePosition()
@@ -88,4 +111,26 @@ public class ArwahLogic : MonoBehaviour
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, idleMoveRadius);
     }
+
+    void ApplySlowEffect()
+    {
+        if (playerLogic != null)
+        {
+            playerLogic.walkspeed = Mathf.Max(0, playerLogic.walkspeed - walkSlowFactor);
+            playerLogic.runspeed = Mathf.Max(0, playerLogic.runspeed - runSlowFactor);
+            Debug.Log("Player slowed by Arwah.");
+        }
+    }
+
+    void RemoveSlowEffect()
+    {
+        if (playerLogic != null)
+        {
+            // Reset kecepatan player ke nilai default (sesuaikan dengan nilai awal di PlayerLogic)
+            playerLogic.walkspeed = 20f; // Ganti dengan nilai awal walkspeed
+            playerLogic.runspeed = 40f; // Ganti dengan nilai awal runspeed
+            Debug.Log("Player speed restored.");
+        }
+    }
+
 }

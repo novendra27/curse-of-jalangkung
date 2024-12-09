@@ -105,7 +105,29 @@ public class GenderuwoLogic : MonoBehaviour
             SinkIntoGround();
             return;
         }
+    // Cek apakah player sudah mati
+if (target != null)
+    {
+        var playerLogic = target.GetComponent<PlayerLogic>();
+        if (playerLogic != null && playerLogic.HitPoints <= 0)
+        {
+            // Player mati, hentikan interaksi dengan target
+            Debug.Log("Player is dead. Genderuwo switching to idle.");
 
+            // Hentikan pengejaran
+            agent.isStopped = true;
+            agent.ResetPath();
+
+            // Kembali ke idle
+            MoveToRandomIdlePosition();
+
+            // Set animasi ke idle
+            anim.SetBool("Run", false);
+            anim.SetBool("Attack", false);
+
+            return; // Hentikan eksekusi lebih lanjut
+        }
+    }
         DistancetoTarget = Vector3.Distance(target.position, transform.position);
         //Debug.Log("Distance to target: " + DistancetoTarget);
 
@@ -287,6 +309,12 @@ public class GenderuwoLogic : MonoBehaviour
 
     private void FaceTarget(Vector3 destination)
     {
+            if (target == null || target.GetComponent<PlayerLogic>().HitPoints <= 0)
+    {
+        // Jangan menghadapi target jika player mati
+        return;
+    }
+    
         Vector3 direction = (destination - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
@@ -346,4 +374,19 @@ public class GenderuwoLogic : MonoBehaviour
             GenderuwoAudio.Play();
         }
     }
+
+    private void StopTargetingPlayer()
+{
+    // Reset agent dan hentikan target
+    agent.isStopped = true;
+    agent.ResetPath();
+
+    // Atur animasi ke idle
+    anim.SetBool("Run", false);
+    anim.SetBool("Attack", false);
+
+    // Pilih posisi idle secara acak
+    MoveToRandomIdlePosition();
+}
+
 }

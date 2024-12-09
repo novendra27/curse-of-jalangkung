@@ -96,6 +96,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7effadc158f3970459b87a28b3f4a9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idleMoveRadius: 5
+  idleMoveSpeed: 1
+  maxIdleMoveTime: 5
+  turnSpeed: 2
+  slowRadius: 5
+  walkSlowFactor: 15
+  runSlowFactor: 30
 --- !u!95 &6068927148090690234
 Animator:
   serializedVersion: 5
