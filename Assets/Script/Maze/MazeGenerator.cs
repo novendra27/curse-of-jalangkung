@@ -21,6 +21,7 @@ public class MazeGenerator : MonoBehaviour
     public GameObject Totem;
     public int TotemCount = 5;
     public NavMeshSurface surface;
+    public UIGameplayLogic uiGameplayLogic; // Referensi ke UIGameplayLogic
 
     private static System.Random rng = new System.Random();
     private List<Vector2> occupiedPositions = new List<Vector2>();
@@ -35,6 +36,10 @@ public class MazeGenerator : MonoBehaviour
         PlaceCharacter();
         PlaceEnemies();
         PlaceTotem();
+        if (uiGameplayLogic != null)
+        {
+            uiGameplayLogic.SetTotalTotems(TotemCount);
+        }
     }
 
     void Update() { }

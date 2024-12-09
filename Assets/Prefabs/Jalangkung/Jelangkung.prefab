@@ -115,8 +115,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 2556978679368223950}
     m_Modifications:
     - target: {fileID: 2231637317467176313, guid: 8f0df91619f53ad44a235155bcfd5430, type: 3}
+      propertyPath: m_Height
+      value: 5.0371256
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231637317467176313, guid: 8f0df91619f53ad44a235155bcfd5430, type: 3}
+      propertyPath: m_Radius
+      value: 2.262137
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231637317467176313, guid: 8f0df91619f53ad44a235155bcfd5430, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231637317467176313, guid: 8f0df91619f53ad44a235155bcfd5430, type: 3}
       propertyPath: m_Center.x
-      value: 0.04
+      value: 0.04000008
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231637317467176313, guid: 8f0df91619f53ad44a235155bcfd5430, type: 3}
+      propertyPath: m_Center.y
+      value: 2.221804
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231637317467176313, guid: 8f0df91619f53ad44a235155bcfd5430, type: 3}
+      propertyPath: m_Center.z
+      value: 0.25863963
       objectReference: {fileID: 0}
     - target: {fileID: 4022303754158644088, guid: 8f0df91619f53ad44a235155bcfd5430, type: 3}
       propertyPath: m_Name
@@ -161,6 +181,10 @@ PrefabInstance:
     - target: {fileID: 4366740497032069570, guid: 8f0df91619f53ad44a235155bcfd5430, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7567141346685937368, guid: 8f0df91619f53ad44a235155bcfd5430, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

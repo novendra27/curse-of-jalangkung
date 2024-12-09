@@ -12,20 +12,33 @@ public class JalangkungLogic : MonoBehaviour
     public GameObject player; // Referensi untuk objek player
 
     [Header("Effects and SFX")]
-    public GameObject destructionEffect; // Efek saat jalangkung dihancurkan
-   // public AudioClip channelingAudio;
- //   public AudioClip destroyAudio;
+    public GameObject destructionEffect;
+    // Efek saat jalangkung                                  
+    // public AudioClip channelingAudio;                                 
+    //   public AudioClip destroyAudio
+    //  private AudioSource audioSource;
 
-  //  private AudioSource audioSource;
+    [Header("UI Reference")]
+    public UIGameplayLogic uiGameplayLogic; // Referensi ke UIGameplayLogic
 
     void Start()
     {
-     //   audioSource = GetComponent<AudioSource>();
+        //   audioSource = GetComponent<AudioSource>();
 
         // Pastikan player tidak null
         if (player == null)
         {
             Debug.LogWarning("Player reference is not assigned in JalangkungLogic!");
+        }
+
+        // Cari referensi ke UIGameplayLogic
+        if (uiGameplayLogic == null)
+        {
+            uiGameplayLogic = FindObjectOfType<UIGameplayLogic>();
+            if (uiGameplayLogic == null)
+            {
+                Debug.LogWarning("UI Gameplay Logic reference is not found in the scene!");
+            }
         }
     }
 
@@ -60,11 +73,11 @@ public class JalangkungLogic : MonoBehaviour
         channelingTimer = 0f;
 
         // Mainkan audio channeling
-     /*   if (channelingAudio != null)
-        {
-            audioSource.clip = channelingAudio;
-            audioSource.Play();
-        }*/
+        /*   if (channelingAudio != null)
+           {
+               audioSource.clip = channelingAudio;
+               audioSource.Play();
+           }*/
 
         Debug.Log("Channeling started...");
     }
@@ -75,11 +88,11 @@ public class JalangkungLogic : MonoBehaviour
         channelingTimer = 0f;
 
         // Hentikan audio channeling
-      /*  if (audioSource.isPlaying && audioSource.clip == channelingAudio)
-        {
-            audioSource.Stop();
-        }
-*/
+        /*  if (audioSource.isPlaying && audioSource.clip == channelingAudio)
+          {
+              audioSource.Stop();
+          }
+  */
         Debug.Log("Channeling stopped.");
     }
 
@@ -94,26 +107,27 @@ public class JalangkungLogic : MonoBehaviour
         }
 
         // Mainkan audio penghancuran
-      /*  if (destroyAudio != null)
-        {
-            audioSource.clip = destroyAudio;
-            audioSource.Play();
-        }
-*/
+        /*  if (destroyAudio != null)
+          {
+              audioSource.clip = destroyAudio;
+              audioSource.Play();
+          }
+  */
         // Hancurkan objek jalangkung setelah sedikit waktu (agar audio sempat diputar)
         //Destroy(gameObject, destroyAudio != null ? destroyAudio.length : 0f);
         Destroy(gameObject);
 
+        // Update UI
+        if (uiGameplayLogic != null)
+        {
+            uiGameplayLogic.IncrementDestroyedTotems();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Cek apakah objek yang masuk adalah player
-        if (other.gameObject == player)
-        {
-            playerInRange = true;
-            Debug.Log("Player entered Jalangkung area.");
-        }
+        playerInRange = true;
+        Debug.Log("Player entered Jalangkung area.");
     }
 
     private void OnTriggerExit(Collider other)

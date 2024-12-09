@@ -10,13 +10,18 @@ public class UIGameplayLogic : MonoBehaviour
 {
     public Image HealthBar;
     public TextMeshProUGUI HealthText;
-    //public GameObject PanelGameResult;
-    //public TextMeshProUGUI GameResultText;
+    public TextMeshProUGUI TotemCountText; // Tambahkan referensi untuk teks jumlah Totem
     public Button buttonMenu;
     public GameObject panelMenu; // Panel yang ingin dibuka/tutup
 
     public GameObject panelPopUp;  // Referensi ke panel pop-up
     public float displayDuration = 6f;  // Durasi tampilan panel pop-up (dalam detik)
+
+    public GameObject PanelGameResult; // Panel untuk menampilkan hasil permainan
+    public TextMeshProUGUI GameResultText; // Teks untuk menampilkan hasil permainan
+
+    private int totalTotems = 0;
+    private int destroyedTotems = 0;
 
     public void Update()
     {
@@ -73,35 +78,55 @@ public class UIGameplayLogic : MonoBehaviour
         HealthBar.fillAmount = CurrentHealth / MaxHealth;
         HealthText.text = CurrentHealth.ToString();
 
-        //if (CurrentHealth <= 0) GameResult(false);
+        if (CurrentHealth <= 0)
+        {
+            GameResult(false);
+        }
     }
 
-    //public void GameResult(bool win)
-    //{
-    //    PanelGameResult.SetActive(true);
-    //    Cursor.lockState = CursorLockMode.None;
-    //    Cursor.visible = true;
-    //    if (win)
-    //    {
-    //        GameResultText.color = Color.green;
-    //        GameResultText.text = "You Win!";
-    //    }
-    //    else
-    //    {
-    //        GameResultText.color = Color.red;
-    //        GameResultText.text = "You Lose!";
-    //    }
-    //}
+    public void SetTotalTotems(int total)
+    {
+        totalTotems = total;
+        UpdateTotemCountText();
+    }
 
-    //public void GameResultDecision(bool TryAgain)
-    //{
-    //    if (TryAgain)
-    //    {
-    //        SceneManager.LoadScene("Maze");
-    //    }
-    //    else
-    //    {
-    //        SceneManager.LoadScene("MainMenu");
-    //    }
-    //}
+    public void IncrementDestroyedTotems()
+    {
+        destroyedTotems++;
+        UpdateTotemCountText();
+
+        if (destroyedTotems >= totalTotems)
+        {
+            GameResult(true);
+        }
+    }
+
+    private void UpdateTotemCountText()
+    {
+        if (TotemCountText != null)
+        {
+            TotemCountText.text = $"{destroyedTotems}/{totalTotems}";
+        }
+    }
+
+    private void GameResult(bool win)
+    {
+        if (PanelGameResult != null && GameResultText != null)
+        {
+            PanelGameResult.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            if (win)
+            {
+                GameResultText.color = Color.green;
+                GameResultText.text = "You Win!";
+            }
+            else
+            {
+                GameResultText.color = Color.red;
+                GameResultText.text = "You Lose!";
+            }
+        }
+    }
 }
