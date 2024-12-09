@@ -122,22 +122,50 @@ public class JalangkungLogic : MonoBehaviour
         {
             uiGameplayLogic.IncrementDestroyedTotems();
         }
+        uiGameplayLogic.ShowPressF(false);
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
-        playerInRange = true;
-        Debug.Log("Player entered Jalangkung area.");
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerInRange = true;
+            uiGameplayLogic.ShowPressF(true);
+        }
     }
 
-    private void OnTriggerExit(Collider other)
+    void OnCollisionExit(Collision collision)
     {
-        // Cek apakah objek yang keluar adalah player
-        if (other.gameObject == player)
+        if (collision.gameObject.CompareTag("Player"))
         {
             playerInRange = false;
             StopChanneling();
-            Debug.Log("Player exited Jalangkung area.");
+            uiGameplayLogic.ShowPressF(false);
         }
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    playerInRange = true;
+    //    if (uiGameplayLogic != null)
+    //    {
+    //        uiGameplayLogic.ShowPressF(true);
+    //    }
+    //    Debug.Log("Player entered Jalangkung area.");
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    // Cek apakah objek yang keluar adalah player
+    //    if (other.gameObject == player)
+    //    {
+    //        playerInRange = false;
+    //        StopChanneling();
+    //        if (uiGameplayLogic != null)
+    //        {
+    //            uiGameplayLogic.ShowPressF(false);
+    //        }
+    //        Debug.Log("Player exited Jalangkung area.");
+    //    }
+    //}
 }

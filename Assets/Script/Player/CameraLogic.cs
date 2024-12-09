@@ -26,6 +26,12 @@ public class CameraLogic : MonoBehaviour
     public AudioClip ShootAudio;
     AudioSource PlayerAudio;
 
+    // Tambahkan referensi ke UIGameplayLogic
+    public UIGameplayLogic UIGameplay;
+
+    // Tambahkan referensi ke panelGameplay
+    public GameObject panelGameplay;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -127,7 +133,6 @@ public class CameraLogic : MonoBehaviour
 
         if (TPS)
         {
-
             mainCamera.cullingMask = ~(1 << aimLayer);
 
             SetLayerRecursively(Player.gameObject, originalPlayerLayer);
@@ -138,10 +143,15 @@ public class CameraLogic : MonoBehaviour
             FlashLight.SetActive(false);
             CameraCanvas.SetActive(false);
             FlashNormal.SetActive(false);
+
+            // Aktifkan panel gameplay
+            if (panelGameplay != null)
+            {
+                panelGameplay.SetActive(true);
+            }
         }
         else if (AIM)
         {
-
             // Mengaktifkan AIM mode tanpa delay
             SetLayerRecursively(Player.gameObject, aimLayer);
             CameraCanvas.SetActive(true);
@@ -149,6 +159,12 @@ public class CameraLogic : MonoBehaviour
             AIMCamera.SetActive(true);
             FlashLight.SetActive(false); // Pastikan flash dimulai dari kondisi mati
             FlashNormal.SetActive(true);
+
+            // Nonaktifkan panel gameplay
+            if (panelGameplay != null)
+            {
+                panelGameplay.SetActive(false);
+            }
         }
     }
 
