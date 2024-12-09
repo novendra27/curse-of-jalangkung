@@ -44,8 +44,18 @@ public class SceneChanger : MonoBehaviour
     }
 
     // Fungsi untuk memuat scene berikutnya
-    private void LoadNextScene()
+    public void LoadNextScene()
     {
         SceneManager.LoadScene(nextSceneName);
+    }
+
+    public void LoadGamePlayScene()
+    {
+        SceneManager.LoadSceneAsync(3);
+    }
+
+    public void LoadMainMenuScene()
+    {
+        SceneManager.LoadSceneAsync(1);
     }
 }

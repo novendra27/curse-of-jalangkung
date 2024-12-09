@@ -8,20 +8,32 @@ using UnityEngine.SceneManagement;
 
 public class UIGameplayLogic : MonoBehaviour
 {
+    // Variabel yang sudah ada
     public Image HealthBar;
     public TextMeshProUGUI HealthText;
-    public TextMeshProUGUI TotemCountText; // Tambahkan referensi untuk teks jumlah Totem
+    public TextMeshProUGUI TotemCountText;
     public Button buttonMenu;
-    public GameObject panelMenu; // Panel yang ingin dibuka/tutup
-
-    public GameObject panelPopUp;  // Referensi ke panel pop-up
-    public float displayDuration = 6f;  // Durasi tampilan panel pop-up (dalam detik)
-
-    public GameObject PanelGameResult; // Panel untuk menampilkan hasil permainan
-    public TextMeshProUGUI GameResultText; // Teks untuk menampilkan hasil permainan
+    public GameObject panelMenu;
+    public GameObject panelPopUp;
+    public float displayDuration = 6f;
+    public GameObject PanelGameResult;
+    public TextMeshProUGUI GameResultText;
 
     private int totalTotems = 0;
     private int destroyedTotems = 0;
+
+    // Variabel untuk timer
+    public TextMeshProUGUI TimerText;
+    public float timerDuration; // Durasi timer dalam detik (misalnya 5 menit)
+    private float timer;
+
+    void Start()
+    {
+        // Panggil metode untuk menampilkan panel pop-up saat scene dimulai
+        ShowPopUp();
+        // Mulai timer
+        StartTimer(timerDuration);
+    }
 
     public void Update()
     {
@@ -45,12 +57,9 @@ public class UIGameplayLogic : MonoBehaviour
                 }
             }
         }
-    }
 
-    void Start()
-    {
-        // Panggil metode untuk menampilkan panel pop-up saat scene dimulai
-        ShowPopUp();
+        // Perbarui timer
+        UpdateTimer();
     }
 
     // Metode untuk menampilkan pop-up
@@ -127,6 +136,30 @@ public class UIGameplayLogic : MonoBehaviour
                 GameResultText.color = Color.red;
                 GameResultText.text = "You Lose!";
             }
+        }
+    }
+
+    // Metode untuk memulai timer
+    public void StartTimer(float duration)
+    {
+        timerDuration = duration;
+        timer = timerDuration;
+    }
+
+    // Metode untuk memperbarui timer
+    private void UpdateTimer()
+    {
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            int minutes = Mathf.FloorToInt(timer / 60);
+            int seconds = Mathf.FloorToInt(timer % 60);
+            TimerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
+        else
+        {
+            // Timer selesai, panggil metode GameResult dengan parameter false
+            GameResult(false);
         }
     }
 }
