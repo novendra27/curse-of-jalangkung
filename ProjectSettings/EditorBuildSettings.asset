@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Maze.unity
     guid: af094e01493b43e4d935846b0c227c4b
   - enabled: 1
+    path: Assets/Scenes/BackStory.unity
+    guid: 8f32540f4a1e697408fb8202187187fc
+  - enabled: 1
     path: Assets/Scenes/GameplayScene.unity
     guid: bd66223c5b613964491074fa6d785f16
   - enabled: 0
