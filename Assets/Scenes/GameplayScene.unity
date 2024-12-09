@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2339,7 +2339,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 694053318}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0682262, y: 0.09634389, z: -0.006619614, w: 0.992985}
+  m_LocalRotation: {x: 0.068226226, y: 0.09634386, z: -0.0066196145, w: 0.992985}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3963,7 +3963,7 @@ Transform:
   m_GameObject: {fileID: 1293279079}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0546358, y: -0.6231692, z: -1.6184583}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3994,12 +3994,12 @@ MonoBehaviour:
   - {fileID: 3722741659724440439, guid: 3ccc6a712aed3bd4591ccb51f09d32da, type: 3}
   - {fileID: 3060618924253637032, guid: acc77ef970ea78f419c30aacf906f785, type: 3}
   - {fileID: 5904732029132264560, guid: 9e3c855bb08240d4293ac98376bcd80a, type: 3}
-  EnemyCount: 30
+  EnemyCount: 15
   RoomCount: 3
   RoomMinSize: 3
   RoomMaxSize: 3
-  Totem: {fileID: 4022303754158644088, guid: 8f0df91619f53ad44a235155bcfd5430, type: 3}
-  TotemCount: 5
+  Totem: {fileID: 5696190237188850632, guid: 67489ebf311067042ac5accd4bbe05b4, type: 3}
+  TotemCount: 100
   surface: {fileID: 2005611654}
 --- !u!1 &1305554270
 GameObject:
@@ -6247,7 +6247,7 @@ Transform:
   m_GameObject: {fileID: 2005611653}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0546358, y: -0.6231692, z: -1.6184583}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
