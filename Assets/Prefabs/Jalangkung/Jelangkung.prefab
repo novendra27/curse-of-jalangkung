@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.25863963
       objectReference: {fileID: 0}
+    - target: {fileID: 2231637317467176313, guid: 8f0df91619f53ad44a235155bcfd5430, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4022303754158644088, guid: 8f0df91619f53ad44a235155bcfd5430, type: 3}
       propertyPath: m_Name
       value: jelangkung2

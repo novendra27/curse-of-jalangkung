@@ -18,6 +18,7 @@ public class UIGameplayLogic : MonoBehaviour
     public float displayDuration = 6f;
     public GameObject PanelGameResult;
     public TextMeshProUGUI GameResultText;
+    public GameObject PressF;
 
     private int totalTotems = 0;
     private int destroyedTotems = 0;
@@ -60,6 +61,14 @@ public class UIGameplayLogic : MonoBehaviour
 
         // Perbarui timer
         UpdateTimer();
+    }
+
+    public void ShowPressF(bool show)
+    {
+        if (PressF != null)
+        {
+            PressF.SetActive(show);
+        }
     }
 
     // Metode untuk menampilkan pop-up
