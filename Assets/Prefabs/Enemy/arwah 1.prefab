@@ -101,6 +101,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idleMoveRadius: 5
   idleMoveSpeed: 1
+  maxIdleMoveTime: 5
+  turnSpeed: 2
+  slowRadius: 5
+  walkSlowFactor: 15
+  runSlowFactor: 30
 --- !u!95 &7932204348360457153
 Animator:
   serializedVersion: 5

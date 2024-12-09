@@ -127,7 +127,6 @@ public class CameraLogic : MonoBehaviour
 
         if (TPS)
         {
-            anim.SetBool("AimMode", false);
 
             mainCamera.cullingMask = ~(1 << aimLayer);
 
@@ -142,7 +141,6 @@ public class CameraLogic : MonoBehaviour
         }
         else if (AIM)
         {
-            anim.SetBool("AimMode", true);
 
             // Mengaktifkan AIM mode tanpa delay
             SetLayerRecursively(Player.gameObject, aimLayer);

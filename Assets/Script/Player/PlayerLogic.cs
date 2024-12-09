@@ -177,7 +177,7 @@ public void PlayerGetHit(float damage)
         PlayerAudio.clip = DeathAudio;
         PlayerAudio.Play();
         anim.SetBool("Death", true);
-                rb.isKinematic = true;  // Menonaktifkan fisika pada Rigidbody
+        rb.isKinematic = true;  // Menonaktifkan fisika pada Rigidbody
 
     }
 }
