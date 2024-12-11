@@ -17,6 +17,7 @@ public class UIGameplayLogic : MonoBehaviour
     public GameObject panelPopUp;
     public float displayDuration = 6f;
     public GameObject PanelGameResult;
+    public GameObject PanelJumpScare;
     public TextMeshProUGUI GameResultText;
     public GameObject PressF;
 
@@ -29,12 +30,16 @@ public class UIGameplayLogic : MonoBehaviour
     private float timer;
 
     void Start()
+{
+    if (PanelJumpScare == null)
     {
-        // Panggil metode untuk menampilkan panel pop-up saat scene dimulai
-        ShowPopUp();
-        // Mulai timer
-        StartTimer(timerDuration);
+        Debug.LogError("PanelJumpScare is not assigned! Please assign it in the Inspector.");
     }
+
+    ShowPopUp();
+    StartTimer(timerDuration);
+}
+
 
     public void Update()
     {
