@@ -15,7 +15,10 @@ public class PlayerLogic : MonoBehaviour
     public Animator anim;
     public CameraLogic camlogic;
     bool TPSMode = true, AimMode = false;
-    
+        private float channelingTimer;
+    private const float maxChannelingDuration = 5f;
+    private bool isChanneling;
+
     // Start is called before the first frame update
 
     [Header("Player SFX")]
@@ -69,7 +72,42 @@ public class PlayerLogic : MonoBehaviour
     {
         SummonJalangkung();
     }
+
+            HandleChannelingAnimation();
+
     }
+ private void HandleChannelingAnimation()
+    {
+        // Ketika tombol F ditekan, aktifkan animasi Channeling
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            anim.SetBool("Channeling", true);
+            Debug.Log("Channeling started");
+            isChanneling = true;
+            channelingTimer = 0f;
+        }
+
+        // Ketika tombol F dilepaskan, nonaktifkan animasi Channeling
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            anim.SetBool("Channeling", false);
+            Debug.Log("Channeling stopped");
+            isChanneling = false;
+        }
+
+        // Jika sedang channeling, perbarui timer
+        if (isChanneling)
+        {
+            channelingTimer += Time.deltaTime;
+            if (channelingTimer >= maxChannelingDuration)
+            {
+                anim.SetBool("Channeling", false);
+                Debug.Log("Channeling stopped due to timeout");
+                isChanneling = false;
+            }
+        }
+    }
+
 
     private void SummonJalangkung()
 {
