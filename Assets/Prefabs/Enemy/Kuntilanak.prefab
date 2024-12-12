@@ -56,7 +56,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: 15
   target: {fileID: 0}
-  ChaseRange: 5
+  ChaseRange: 10
   GamePlayLogic: {fileID: 0}
   PanelJumpScare: {fileID: 0}
 --- !u!95 &5644086898752054983
@@ -90,7 +90,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

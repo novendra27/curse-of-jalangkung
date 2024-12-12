@@ -907,6 +907,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: phone
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b8fcb1a81ff88a54a842ebb84b589270, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -988,7 +992,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 423651130}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.067704275, y: 0.095494755, z: -0.006510302, w: 0.9931035}
+  m_LocalRotation: {x: 0.067704275, y: 0.09549479, z: -0.0065103034, w: 0.9931035}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2638,7 +2642,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 617972572}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06770429, y: 0.09549475, z: -0.006510302, w: 0.99310344}
+  m_LocalRotation: {x: 0.06770429, y: 0.09549482, z: -0.006510306, w: 0.99310344}
   m_LocalPosition: {x: -3.2576847, y: 11.530001, z: -9.298367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2979,7 +2983,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 694053318}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.08575712, y: 0.095360555, z: -0.008246226, w: 0.9917077}
+  m_LocalRotation: {x: 0.0857571, y: 0.095360555, z: -0.008246227, w: 0.99170774}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3838,7 +3842,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 993761248}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.04967679, y: 0.09559716, z: -0.0047768173, w: 0.99416834}
+  m_LocalRotation: {x: 0.04967679, y: 0.09559717, z: -0.0047768173, w: 0.9941683}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5285,12 +5289,12 @@ MonoBehaviour:
   - {fileID: 3722741659724440439, guid: 3ccc6a712aed3bd4591ccb51f09d32da, type: 3}
   - {fileID: 3060618924253637032, guid: acc77ef970ea78f419c30aacf906f785, type: 3}
   - {fileID: 5904732029132264560, guid: 9e3c855bb08240d4293ac98376bcd80a, type: 3}
-  EnemyCount: 20
+  EnemyCount: 15
   RoomCount: 3
   RoomMinSize: 3
   RoomMaxSize: 3
   Totem: {fileID: 5696190237188850632, guid: 67489ebf311067042ac5accd4bbe05b4, type: 3}
-  TotemCount: 3
+  TotemCount: 5
   surface: {fileID: 2005611654}
   uiGameplayLogic: {fileID: 1595769868}
 --- !u!1 &1305554270
@@ -6100,7 +6104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 1.712291, z: -2.676617}
+  m_FollowOffset: {x: 0, y: 2.497283, z: -2.999699}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -6603,7 +6607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 1.712291, z: -2.676617}
+  m_FollowOffset: {x: 0, y: 2.497283, z: -2.999699}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -6847,7 +6851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 1.712291, z: -2.676617}
+  m_FollowOffset: {x: 0, y: 2.497283, z: -2.999699}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -8160,8 +8164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0117293debb1fc84083d3532c72044f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkspeed: 10
-  runspeed: 20
+  walkspeed: 6
+  runspeed: 12
   fallspeed: 25
   airMultiplier: 3
   HitPoints: 100

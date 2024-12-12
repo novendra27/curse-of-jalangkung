@@ -15,8 +15,6 @@ public class ArwahLogic : MonoBehaviour
     public float turnSpeed = 2f;
     
     public float slowRadius = 5f; // Radius dalam meter di mana efek slow diberikan
-    public float walkSlowFactor = 10f; // Faktor pengurangan kecepatan berjalan
-    public float runSlowFactor = 20f; // Faktor pengurangan kecepatan berlari
     private PlayerLogic playerLogic; // Referensi ke PlayerLogic
 
     private CameraLogic cameraLogic; // Referensi ke CameraLogic
@@ -116,8 +114,8 @@ public class ArwahLogic : MonoBehaviour
     {
         if (playerLogic != null)
         {
-            playerLogic.walkspeed = Mathf.Max(0, playerLogic.walkspeed - walkSlowFactor);
-            playerLogic.runspeed = Mathf.Max(0, playerLogic.runspeed - runSlowFactor);
+            playerLogic.walkspeed = (playerLogic.walkspeed / 2);
+            playerLogic.runspeed = (playerLogic.runspeed / 2);
             Debug.Log("Player slowed by Arwah.");
         }
     }
@@ -127,8 +125,8 @@ public class ArwahLogic : MonoBehaviour
         if (playerLogic != null)
         {
             // Reset kecepatan player ke nilai default (sesuaikan dengan nilai awal di PlayerLogic)
-            playerLogic.walkspeed = 20f; // Ganti dengan nilai awal walkspeed
-            playerLogic.runspeed = 40f; // Ganti dengan nilai awal runspeed
+            playerLogic.walkspeed = 6f; // Ganti dengan nilai awal walkspeed
+            playerLogic.runspeed = 12f; // Ganti dengan nilai awal runspeed
             Debug.Log("Player speed restored.");
         }
     }

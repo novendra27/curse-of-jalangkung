@@ -85,7 +85,7 @@ public class GenderuwoLogic : MonoBehaviour
 
         GenderuwoAudio = this.GetComponent<AudioSource>();
         GenderuwoAudio.spatialBlend = 1.0f; // Set to 3D sound
-        GenderuwoAudio.maxDistance = ChaseRange; // Set max distance to ChaseRange
+        GenderuwoAudio.maxDistance = (ChaseRange + 3); // Set max distance to ChaseRange
 
     }
 
@@ -303,7 +303,7 @@ if (target != null)
     {
         if (DistancetoTarget <= agent.stoppingDistance)
         {
-            target.GetComponent<PlayerLogic>().PlayerGetHit(50f);
+            target.GetComponent<PlayerLogic>().PlayerGetHit(20f);
         }
     }
 
@@ -353,11 +353,8 @@ if (target != null)
 
     public void PlayGenderuwoStep()
     {
-        if (Vector3.Distance(transform.position, target.position) <= ChaseRange)
-        {
             GenderuwoAudio.clip = GenderuwoStep;
             GenderuwoAudio.Play();
-        }
     }
 
     public void PlayGenderuwoHurt()
@@ -368,11 +365,8 @@ if (target != null)
 
     public void PlayGenderuwoIdleYawn()
     {
-        if (Vector3.Distance(transform.position, target.position) <= ChaseRange)
-        {
             GenderuwoAudio.clip = GenderuwoIdleYawn;
             GenderuwoAudio.Play();
-        }
     }
 
     private void StopTargetingPlayer()

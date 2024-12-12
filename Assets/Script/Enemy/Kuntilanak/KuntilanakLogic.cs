@@ -57,15 +57,15 @@ public class KuntilanakLogic : MonoBehaviour
             {
                 Attack();
                 
-                if (GamePlayLogic != null && GamePlayLogic.PanelJumpScare != null)
-                {
-                    GamePlayLogic.PanelJumpScare.SetActive(true);
-                }
-                else
-                {
-                    GamePlayLogic.PanelJumpScare.SetActive(false);
-                    Debug.LogError("PanelJumpScare is not assigned or GamePlayLogic is missing!");
-                }
+                //if (GamePlayLogic != null && GamePlayLogic.PanelJumpScare != null)
+                //{
+                //    GamePlayLogic.PanelJumpScare.SetActive(true);
+                //}
+                //else
+                //{
+                //    GamePlayLogic.PanelJumpScare.SetActive(false);
+                //    Debug.LogError("PanelJumpScare is not assigned or GamePlayLogic is missing!");
+                //}
             }
         }
         else // Just face the target when in range but further than half chase range
@@ -110,18 +110,18 @@ public class KuntilanakLogic : MonoBehaviour
     anim.SetBool("Attack", true);
 
     // Tampilkan JumpScare dengan durasi 3 detik, lalu hancurkan Kuntilanak
-    if (GamePlayLogic != null && GamePlayLogic.PanelJumpScare != null)
-    {
-        StartCoroutine(ShowJumpScareAndDestroy());
-    }
-    else
-    {
-        Debug.LogError("PanelJumpScare is not assigned or GamePlayLogic is missing!");
-    }
+    //if (GamePlayLogic != null && GamePlayLogic.PanelJumpScare != null)
+    //{
+    //    StartCoroutine(ShowJumpScareAndDestroy());
+    //}
+    //else
+    //{
+    //    Debug.LogError("PanelJumpScare is not assigned or GamePlayLogic is missing!");
+    //}
 }
 
 
-    private IEnumerator ShowJumpScareAndDestroy()
+    public IEnumerator ShowJumpScareAndDestroy()
 {
     // Tampilkan PanelJumpScare
     GamePlayLogic.PanelJumpScare.SetActive(true);
