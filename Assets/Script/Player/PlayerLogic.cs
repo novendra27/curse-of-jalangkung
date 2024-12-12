@@ -50,59 +50,53 @@ public class PlayerLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        Movement();
-            if (!grounded)
-    {
-        // Tambahkan gaya jatuh secara manual
-        rb.AddForce(Vector3.down * fallspeed * rb.mass, ForceMode.Force);  // Tambahkan gaya jatuh
+        if (Time.timeScale == 0f) return; // Tambahkan pengecekan status pause
 
-        // Anda bisa mengubah nilai fallspeed untuk mempercepat atau memperlambat kecepatan jatuh karakter
-    }//
+        Movement();
+        if (!grounded)
+        {
+            rb.AddForce(Vector3.down * fallspeed * rb.mass, ForceMode.Force);
+        }
         AimModeAdjuster();
-        if(Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             PlayerGetHit(100f);
-        } 
-        if (Input.GetKeyDown(KeyCode.P)){
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
             PlayerGetHit(10f);
         }
 
-         if (Input.GetKeyDown(summonKey))
-    {
-        SummonJalangkung();
-    }
+        if (Input.GetKeyDown(summonKey))
+        {
+            SummonJalangkung();
+        }
 
-            HandleChannelingAnimation();
-
+        HandleChannelingAnimation();
     }
- private void HandleChannelingAnimation()
+    private void HandleChannelingAnimation()
     {
-        // Ketika tombol F ditekan, aktifkan animasi Channeling
+        if (Time.timeScale == 0f) return; // Tambahkan pengecekan status pause
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             anim.SetBool("Channeling", true);
-            Debug.Log("Channeling started");
             isChanneling = true;
             channelingTimer = 0f;
         }
 
-        // Ketika tombol F dilepaskan, nonaktifkan animasi Channeling
         if (Input.GetKeyUp(KeyCode.F))
         {
             anim.SetBool("Channeling", false);
-            Debug.Log("Channeling stopped");
             isChanneling = false;
         }
 
-        // Jika sedang channeling, perbarui timer
         if (isChanneling)
         {
             channelingTimer += Time.deltaTime;
             if (channelingTimer >= maxChannelingDuration)
             {
                 anim.SetBool("Channeling", false);
-                Debug.Log("Channeling stopped due to timeout");
                 isChanneling = false;
             }
         }
@@ -165,37 +159,31 @@ private void Movement()
         grounded = true;
     }
 
-public void AimModeAdjuster()
-{
-    // Cek jika tombol Mouse1 (klik kanan) ditekan
-    if (Input.GetKeyDown(KeyCode.Mouse1))
+    private void AimModeAdjuster()
     {
-        Debug.Log("mouse1");
+        if (Time.timeScale == 0f) return; // Tambahkan pengecekan status pause
 
-        // Cek apakah pemain sedang berlari atau berjalan
-        if (Input.GetKey(KeyCode.LeftShift) || (horizontalInput != 0 || verticalInput != 0))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            // Jangan izinkan transisi ke AIM mode saat berlari atau berjalan
-            Debug.Log("Cannot switch to AIM mode while running or walking.");
-            return;
-        }
+            if (Input.GetKey(KeyCode.LeftShift) || (horizontalInput != 0 || verticalInput != 0))
+            {
+                return;
+            }
 
-        // Jika tidak berlari atau berjalan, izinkan perubahan mode
-        if (AimMode)
-        {
-            TPSMode = true;
-            AimMode = false;
-        }
-        else if (TPSMode)
-        {
-            TPSMode = false;
-            AimMode = true;
-        }
+            if (AimMode)
+            {
+                TPSMode = true;
+                AimMode = false;
+            }
+            else if (TPSMode)
+            {
+                TPSMode = false;
+                AimMode = true;
+            }
 
-        // Panggil CameraModeChanger dengan status mode baru
-        camlogic.CameraModeChanger(TPSMode, AimMode);
+            camlogic.CameraModeChanger(TPSMode, AimMode);
+        }
     }
-}
 
 
 public void PlayerGetHit(float damage)

@@ -193,6 +193,8 @@ public class UIGameplayLogic : MonoBehaviour
             Time.timeScale = 1f;
             if (PanelPause != null)
             {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 PanelPause.SetActive(false);
                 PanelGamePlay.SetActive(true);
                 panelPopUp.SetActive(false);

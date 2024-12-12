@@ -18,6 +18,8 @@ public class WeaponLogic : MonoBehaviour
     // Method untuk melakukan serangan foto saat klik kiri ditekan dalam mode AIM
     public void Shoot()
     {
+        if (Time.timeScale == 0f) return; // Tambahkan pengecekan status pause
+
         if (isInCameraMode)
         {
             StartCoroutine(TakePhoto());
