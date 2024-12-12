@@ -14,9 +14,9 @@ public class JalangkungLogic : MonoBehaviour
     [Header("Effects and SFX")]
     public GameObject destructionEffect;
     // Efek saat jalangkung                                  
-    // public AudioClip channelingAudio;                                 
+    public AudioClip channelingAudio;                                 
     //   public AudioClip destroyAudio
-    //  private AudioSource audioSource;
+    AudioSource PlayerAudio;
 
     [Header("UI Reference")]
     public UIGameplayLogic uiGameplayLogic; // Referensi ke UIGameplayLogic
@@ -40,6 +40,8 @@ public class JalangkungLogic : MonoBehaviour
                 Debug.LogWarning("UI Gameplay Logic reference is not found in the scene!");
             }
         }
+                PlayerAudio = this.GetComponent<AudioSource>();
+
     }
 
     void Update()
@@ -73,11 +75,12 @@ public class JalangkungLogic : MonoBehaviour
         channelingTimer = 0f;
 
         // Mainkan audio channeling
-        /*   if (channelingAudio != null)
+           if (channelingAudio != null)
            {
-               audioSource.clip = channelingAudio;
-               audioSource.Play();
-           }*/
+                PlayerAudio.clip = channelingAudio;
+                PlayerAudio.Play();
+
+           }
 
         Debug.Log("Channeling started...");
     }
@@ -88,11 +91,11 @@ public class JalangkungLogic : MonoBehaviour
         channelingTimer = 0f;
 
         // Hentikan audio channeling
-        /*  if (audioSource.isPlaying && audioSource.clip == channelingAudio)
-          {
-              audioSource.Stop();
-          }
-  */
+        if (PlayerAudio != null && PlayerAudio.isPlaying && PlayerAudio.clip == channelingAudio)
+        {
+            PlayerAudio.Stop();
+        }
+  
         Debug.Log("Channeling stopped.");
     }
 
