@@ -353,8 +353,12 @@ if (target != null)
 
     public void PlayGenderuwoStep()
     {
+        if (DistancetoTarget <= (ChaseRange + 3))
+        {
             GenderuwoAudio.clip = GenderuwoStep;
             GenderuwoAudio.Play();
+        }
+            
     }
 
     public void PlayGenderuwoHurt()
@@ -365,8 +369,11 @@ if (target != null)
 
     public void PlayGenderuwoIdleYawn()
     {
+        if (DistancetoTarget <= (ChaseRange + 3))
+        {
             GenderuwoAudio.clip = GenderuwoIdleYawn;
             GenderuwoAudio.Play();
+        }
     }
 
     private void StopTargetingPlayer()

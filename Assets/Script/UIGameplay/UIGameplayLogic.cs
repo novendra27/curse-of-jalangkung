@@ -13,13 +13,17 @@ public class UIGameplayLogic : MonoBehaviour
     public TextMeshProUGUI HealthText;
     public TextMeshProUGUI TotemCountText;
     public Button buttonMenu;
-    public GameObject panelMenu;
+
     public GameObject panelPopUp;
     public float displayDuration = 6f;
     public GameObject PanelGameResult;
+    public GameObject PanelGamePlay;
     public GameObject PanelJumpScare;
     public TextMeshProUGUI GameResultText;
     public GameObject PressF;
+
+    public GameObject PanelPause;
+    public GameObject ControlMenu;
 
     private int totalTotems = 0;
     private int destroyedTotems = 0;
@@ -29,43 +33,33 @@ public class UIGameplayLogic : MonoBehaviour
     public float timerDuration; // Durasi timer dalam detik (misalnya 5 menit)
     private float timer;
 
+    // Variabel untuk pause
+    private bool isPaused = false;
+
     void Start()
-{
-    if (PanelJumpScare == null)
     {
-        Debug.LogError("PanelJumpScare is not assigned! Please assign it in the Inspector.");
+        if (PanelJumpScare == null)
+        {
+            Debug.LogError("PanelJumpScare is not assigned! Please assign it in the Inspector.");
+        }
+
+        ShowPopUp();
+        StartTimer(timerDuration);
     }
-
-    ShowPopUp();
-    StartTimer(timerDuration);
-}
-
 
     public void Update()
     {
         // Cek jika tombol ESC ditekan
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (panelMenu != null)
-            {
-                // Jika panel aktif, tutup panel
-                if (panelMenu.activeSelf)
-                {
-                    panelMenu.SetActive(false);
-                }
-                else
-                {
-                    // Jika panel tidak aktif, panggil metode onClick pada button
-                    if (buttonMenu != null)
-                    {
-                        buttonMenu.onClick.Invoke();
-                    }
-                }
-            }
+            TogglePause();
         }
 
-        // Perbarui timer
-        UpdateTimer();
+        // Perbarui timer jika game tidak dalam keadaan pause
+        if (!isPaused)
+        {
+            UpdateTimer();
+        }
     }
 
     public void ShowPressF(bool show)
@@ -137,6 +131,7 @@ public class UIGameplayLogic : MonoBehaviour
         if (PanelGameResult != null && GameResultText != null)
         {
             PanelGameResult.SetActive(true);
+            PanelGamePlay.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
@@ -176,4 +171,55 @@ public class UIGameplayLogic : MonoBehaviour
             GameResult(false);
         }
     }
+
+    // Metode untuk toggle pause
+    private void TogglePause()
+    {
+        isPaused = !isPaused;
+        if (isPaused)
+        {
+            Time.timeScale = 0f;
+            if (PanelPause != null)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                PanelPause.SetActive(true);
+                PanelGamePlay.SetActive(false);
+                panelPopUp.SetActive(false);
+            }
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            if (PanelPause != null)
+            {
+                PanelPause.SetActive(false);
+                PanelGamePlay.SetActive(true);
+                panelPopUp.SetActive(false);
+                ControlMenu.SetActive(false);
+            }
+        }
+    }
+
+    public void OpenControl()
+    {
+        if (ControlMenu != null)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            PanelPause.SetActive(false);
+            ControlMenu.SetActive(true);
+        }
+    }
+    public void CloseControl()
+    {
+        if (ControlMenu != null)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            PanelPause.SetActive(true);
+            ControlMenu.SetActive(false);
+        }
+    }
+
 }

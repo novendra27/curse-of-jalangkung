@@ -8,7 +8,8 @@ public class SceneChanger : MonoBehaviour
 {
     public RawImage rawImage;  // Referensi ke RawImage untuk video
     public VideoPlayer videoPlayer;  // Referensi ke VideoPlayer untuk memutar video
-    public string nextSceneName;  // Nama scene yang ingin dipindah
+    public string nextSceneName;
+    public string nextSceneName2;// Nama scene yang ingin dipindah
 
     private float videoDuration = 30f;  // Durasi waktu dalam detik (30 detik)
     private float timer = 0f;  // Timer untuk menghitung waktu sejak scene dimulai
@@ -48,6 +49,10 @@ public class SceneChanger : MonoBehaviour
     public void LoadNextScene()
     {
         SceneManager.LoadScene(nextSceneName);
+    }
+    public void LoadNextScene2()
+    {
+        SceneManager.LoadScene(nextSceneName2);
     }
 
     public void LoadGamePlayScene()
