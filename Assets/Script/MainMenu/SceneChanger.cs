@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;  // Untuk memuat scene
 using UnityEngine.UI;  // Untuk RawImage
@@ -51,11 +52,18 @@ public class SceneChanger : MonoBehaviour
 
     public void LoadGamePlayScene()
     {
-        SceneManager.LoadSceneAsync(3);
+        StartCoroutine(LoadSceneWithDelay(3));
     }
 
     public void LoadMainMenuScene()
     {
-        SceneManager.LoadSceneAsync(1);
+        StartCoroutine(LoadSceneWithDelay(1));
+    }
+
+    private IEnumerator LoadSceneWithDelay(int sceneIndex)
+    {
+        // Delay selama 0.5 detik
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadSceneAsync(sceneIndex);
     }
 }
