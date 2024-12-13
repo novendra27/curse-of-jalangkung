@@ -114,8 +114,8 @@ public class ArwahLogic : MonoBehaviour
     {
         if (playerLogic != null)
         {
-            playerLogic.walkspeed = (playerLogic.walkspeed / 2);
-            playerLogic.runspeed = (playerLogic.runspeed / 2);
+            playerLogic.walkspeed = (playerLogic.walkspeed * 2 / 3);
+            playerLogic.runspeed = (playerLogic.runspeed * 2 / 3);
             Debug.Log("Player slowed by Arwah.");
         }
     }

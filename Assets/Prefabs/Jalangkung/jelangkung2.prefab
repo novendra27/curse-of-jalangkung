@@ -125,7 +125,7 @@ MonoBehaviour:
   destructionTime: 5
   player: {fileID: 919132149155446097, guid: f00b013a7e1a92e46b2f5165bf7e1e7f, type: 3}
   destructionEffect: {fileID: 0}
-  channelingAudio: {fileID: 8300000, guid: 2e1b617a236dbb744a780dc91247ada0, type: 3}
+  channelingAudio: {fileID: 8300000, guid: 87ab5c3d747bd564da9a8f168abdf7e8, type: 3}
   uiGameplayLogic: {fileID: 0}
 --- !u!82 &4614981915015862934
 AudioSource:
@@ -139,7 +139,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
