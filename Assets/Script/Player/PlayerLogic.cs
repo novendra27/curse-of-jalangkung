@@ -6,7 +6,7 @@ public class PlayerLogic : MonoBehaviour
 {
     [Header("Player Setting")]
     private Rigidbody rb;
-    public float walkspeed, runspeed, fallspeed, airMultiplier, HitPoints = 100f;
+    public float walkspeed = 6f, runspeed = 12f, fallspeed, airMultiplier, HitPoints = 100f;
     public Transform PlayerOrientation;
     float horizontalInput;
     float verticalInput;
